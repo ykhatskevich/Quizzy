@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
-
-export default function SelectCategory() {
-  return (
-    <>
+export default function SelectDifficulty () {
+    return (
+        <>
       <div className="min-h-screen flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center gap-6">
           <h1
@@ -38,5 +36,6 @@ export default function SelectCategory() {
         </div>
       </div>
     </>
-  );
+
+    )
 }
