@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 export default function SelectDifficulty () {
     return (
         <>
@@ -7,30 +9,25 @@ export default function SelectDifficulty () {
             className="text-4xl text-fuchsia-300"
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
-            Please select a category
+            Please select difficulty
           </h1>
 
           <ul
             className="flex flex-col gap-1 text-2xl text-teal-400"
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
-              LINUX
+            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100 ">
+              EASY
             </li>
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
-              DEV OPS
+            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
+              MEDIUM
             </li>
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
-              NETWORKING
+            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
+              HARD
             </li>
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
-              PROGRAMMING
-            </li>
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
-              CLOUD
-            </li>
+            
             <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors ">
-              <Link to="/">Back to Home</Link>
+              <Link to="/category">Back to Categories</Link>
             </li>
           </ul>
         </div>

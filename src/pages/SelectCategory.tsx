@@ -17,7 +17,8 @@ export default function SelectCategory() {
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
             <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
-              LINUX
+            <Link to="/difficulty">LINUX</Link>
+              
             </li>
             <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
               DEV OPS
