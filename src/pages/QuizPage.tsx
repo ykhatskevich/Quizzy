@@ -32,6 +32,9 @@ interface Question {
 
 export default function QuizPage() {
     const [questions, setQuestions] = useState<Question[]>([]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); //keeps track of which question is currently being displayed
+    const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+    const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false); // keeps track of whether the user has submitted an answer
     const location = useLocation();
     const category = new URLSearchParams(location.search).get('category');
     const difficulty = new URLSearchParams(location.search).get('difficulty');
@@ -55,10 +58,87 @@ export default function QuizPage() {
               console.error("Error fetching questions:", error);
             });
         }, [category, difficulty]);
+
+       const currentQuestion = questions[currentQuestionIndex]; //current question being displayed
+
+       const handleAnswerSelection = (selectedOption: string) => {
+        if (!isAnswerSubmitted) {
+          setSelectedAnswer(selectedOption);   //if the user has not submitted an answer, then set the selected answer to the option that the user clicked on
+        }
+      };
+
+      const handleSubmitAnswer = () => {
+        setIsAnswerSubmitted(true);
+      } //when the user clicks on the submit button, set isAnswerSubmitted to true
+
+      // eslint-disable-next-line no-unused-vars
+      const handleNextQuestion = () => {
+        setSelectedAnswer(null);
+        setIsAnswerSubmitted(false);
+
+        //move to the next question if there is one
+        if (currentQuestionIndex < questions.length - 1) {
+          setCurrentQuestionIndex(currentQuestionIndex + 1);
+        }
+      };
+
        return (
         <div>
-            {questions.length}
+      {currentQuestion && (
+        <div>
+          <h3>{currentQuestion.question}</h3>
+          <ul>
+            {Object.entries(currentQuestion.answers).map(([option, text]) => {
+              // Check if the text is not null and not empty
+              if (text) {
+                return (
+                  <li
+                    key={option}
+                    onClick={() => handleAnswerSelection(option)}
+                    className={`${
+                      isAnswerSubmitted
+                        ? (currentQuestion.correct_answers as Record<string, boolean>)[`${option}_correct`]
+                        : ""
+                    }`}
+                  >
+                    {text}
+                  </li>
+                );
+              } else {
+                return null; // Skip rendering if answer text is empty
+              }
+            })}
+          </ul>
+          {isAnswerSubmitted && (
+            <div>
+              {selectedAnswer &&
+    (currentQuestion.correct_answers as Record<string, boolean>)[
+      `${selectedAnswer}_correct`
+    ] ? (
+      <p>Correct!</p>
+    ) : (
+      <p>
+        Incorrect. The correct answer is{" "}
+        {Object.entries(currentQuestion.correct_answers)
+        /* eslint-disable no-unused-vars */
+          .filter(([_, value]) => value)
+          .map(([key]) => key)
+          .join(", ")}
+      </p>
+    )}
+              {currentQuestionIndex < questions.length - 1 ? (
+                <button onClick={handleNextQuestion}>Next Question</button>
+              ) : (
+                <p>Quiz Complete!</p>
+              )}
+            </div>
+          )}
+          {!isAnswerSubmitted && selectedAnswer && (
+            <button onClick={handleSubmitAnswer}>Submit Answer</button>
+          )}
         </div>
+      )}
+    </div>
     
        )      
 }
