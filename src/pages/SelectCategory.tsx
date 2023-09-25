@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SelectCategory() {
+  const navigate = useNavigate();
+
+  const handleCategorySelect = (category: string) => {
+    navigate(`/difficulty?category=${category}`);
+  };
+
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center">
@@ -16,9 +22,11 @@ export default function SelectCategory() {
             className="flex flex-col gap-1 text-2xl text-teal-400"
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
-            <Link to="/difficulty">LINUX</Link>
-              
+            <li
+              className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100"
+              onClick={() => handleCategorySelect("Linux")}
+            >
+              LINUX
             </li>
             <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
               DEV OPS

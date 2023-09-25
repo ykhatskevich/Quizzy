@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SelectCategory from "./pages/SelectCategory";
 import SelectDifficulty from "./pages/SelectDifficulty";
+import QuizPage from "./pages/QuizPage";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Route path="/" element={<HomePage />} />
     <Route path="/category" element={<SelectCategory />} />
     <Route path="/difficulty" element={<SelectDifficulty />} />
+    <Route path="/quiz" element={<QuizPage />} />
     
     
     </Routes>
