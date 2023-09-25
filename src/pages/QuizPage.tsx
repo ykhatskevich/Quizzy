@@ -80,6 +80,7 @@ export default function QuizPage() {
         if (currentQuestionIndex < questions.length - 1) {
           setCurrentQuestionIndex(currentQuestionIndex + 1);
         }
+      };
 
        return (
         <div>
@@ -140,5 +141,4 @@ export default function QuizPage() {
     </div>
     
        )      
-}
 }
