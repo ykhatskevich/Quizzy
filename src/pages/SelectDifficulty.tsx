@@ -1,6 +1,15 @@
-import {Link} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 
 export default function SelectDifficulty () {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const category = new URLSearchParams(location.search).get('category');
+
+    const handleDifficultySelect = (difficulty: string) => {
+      navigate( `/quiz?category=${category}&difficulty=${difficulty}`);
+    };
+
+
     return (
         <>
       <div className="min-h-screen flex flex-col items-center justify-center">
@@ -16,7 +25,8 @@ export default function SelectDifficulty () {
             className="flex flex-col gap-1 text-2xl text-teal-400"
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
-            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100 ">
+            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100 "
+            onClick={() => handleDifficultySelect('easy')}>
               EASY
             </li>
             <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100">
