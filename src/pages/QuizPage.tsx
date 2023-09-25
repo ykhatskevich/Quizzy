@@ -38,7 +38,7 @@ export default function QuizPage() {
 
     useEffect(() => {
         fetch(
-            `https://quizapi.io/api/v1/questions?apiKey=yCQVhQnw6eDgar42ge03acAhwuc12x0OIvcVCJJy&category=${category}&difficulty=${difficulty}`
+            `https://quizapi.io/api/v1/questions?apiKey=yCQVhQnw6eDgar42ge03acAhwuc12x0OIvcVCJJy&category=${category}&difficulty=${difficulty}&limit=20`
           )
             .then((response) => response.json())
             .then((data) => {
