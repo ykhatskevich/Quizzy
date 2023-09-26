@@ -98,7 +98,7 @@ export default function QuizPage() {
       {currentQuestion && (
         <div className="text-center max-w-lg">
           <h3
-            className="text-3xl text-indigo-300 mb-5 border border-indigo-200 rounded-lg"
+            className="text-3xl text-indigo-300 mb-5 p-3 border border-indigo-200 rounded-lg"
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
             {currentQuestion.question}
@@ -115,8 +115,8 @@ export default function QuizPage() {
                         ? isAnswerCorrect
                           ? "text-green-500 text-2xl" // Green text for correct answers
                           : "text-red-500 text-2xl" // Red text for incorrect answers
-                        : "text-gray-200 text-2xl" // Default text color
-                    } cursor-pointer hover:text-indigo-500`}
+                        : "text-teal-400 text-2xl" // Default text color
+                    } cursor-pointer border-b mb-7 hover:text-teal-100`}
                   >
                     {text}
                   </li>
@@ -130,7 +130,7 @@ export default function QuizPage() {
             <div>
               {selectedAnswer &&
                 (isAnswerCorrect ? (
-                  <p>Correct!</p>
+                  <p className="text-3xl text-green-200 font-semibold">Correct!</p>
                 ) : (
                   <p>
                     Incorrect. The correct answer is{" "}
