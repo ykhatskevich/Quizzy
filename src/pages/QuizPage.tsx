@@ -94,10 +94,11 @@ export default function QuizPage() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col items-center justify-center">
       {currentQuestion && (
-        <div>
-          <h3>{currentQuestion.question}</h3>
+        <div className="text-center max-w-lg">
+          <h3 className="text-3xl text-indigo-300"
+            style={{ fontFamily: "IBM PLEX MONO, monospace" }}>{currentQuestion.question}</h3>
           <ul>
             {Object.entries(currentQuestion.answers).map(([option, text]) => {
               if (text) {
