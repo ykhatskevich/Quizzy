@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import {Link } from 'react-router-dom';
 
 interface Question {
   id: number;
@@ -108,6 +109,16 @@ export default function QuizPage() {
     }
   };
 
+  const handleTryAgain = () => {
+    setCurrentQuestionIndex(0); // Reset the current question index to the first question.
+    setSelectedAnswer(null); // Reset the selected answer.
+    setIsAnswerSubmitted(false); // Reset the answer submission state.
+    setIsAnswerCorrect(false); // Reset the answer correctness state.
+    setCorrectAnswersCount(0); // Reset the correct answers count.
+  };
+
+
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       {currentQuestion && (
@@ -162,8 +173,14 @@ export default function QuizPage() {
               {currentQuestionIndex < questions.length - 1 ? (
                 <button onClick={handleNextQuestion} className="text-3xl text-teal-400 mt-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">Next Question</button>
               ) : (
-                <p className="text-2xl text-green-300">Quiz Complete! Correct answers:{correctAnswersCount}/
+                <div>
+                <p className="text-4xl text-green-300">Quiz Complete! Correct answers:{correctAnswersCount}/
                 {totalQuestionsCount}</p>
+                <button onClick={handleTryAgain} className="text-2xl text-teal-400 mt-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">Try again!</button>
+                <Link to="/">
+                <button className="text-2xl text-teal-400 mt-4 ml-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">Back to Home Page</button>
+                </Link>
+              </div>
               )}
             </div>
           )}
