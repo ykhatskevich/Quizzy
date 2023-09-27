@@ -132,8 +132,8 @@ export default function QuizPage() {
                 (isAnswerCorrect ? (
                   <p className="text-3xl text-green-200 font-semibold">Correct!</p>
                 ) : (
-                  <p>
-                    Incorrect. The correct answer is{" "}
+                  <p className="text-2xl text-indigo-300 font-semibold">
+                    <span className="text-3xl text-red-200">Incorrect!</span> The correct answer is{" "}
                     {Object.entries(currentQuestion.answers)
                       .filter(
                         ([key]) =>
@@ -145,14 +145,14 @@ export default function QuizPage() {
                   </p>
                 ))}
               {currentQuestionIndex < questions.length - 1 ? (
-                <button onClick={handleNextQuestion}>Next Question</button>
+                <button onClick={handleNextQuestion} className="text-3xl text-teal-400 mt-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">Next Question</button>
               ) : (
                 <p>Quiz Complete!</p>
               )}
             </div>
           )}
           {!isAnswerSubmitted && selectedAnswer && (
-            <button onClick={handleSubmitAnswer}>Submit Answer</button>
+            <button onClick={handleSubmitAnswer} >Submit Answer</button>
           )}
         </div>
       )}
