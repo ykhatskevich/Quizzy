@@ -11,7 +11,7 @@ function App() {
 
   return (
     <Router>
-    <div className="bg-gray-800 h-screen">
+    <div className="bg-gray-900 h-screen">
       <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/category" element={<SelectCategory />} />
