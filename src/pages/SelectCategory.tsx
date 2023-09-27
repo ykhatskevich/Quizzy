@@ -23,25 +23,30 @@ export default function SelectCategory() {
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
             <li
-              className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100"
+              className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100
+              flex justify-center items-center"
               onClick={() => handleCategorySelect("linux")}
             >
               LINUX
             </li>
             
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100"
+            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100
+            flex justify-center items-center"
             onClick={() => handleCategorySelect("sql")}>
               SQL
             </li>
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100"
+            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100
+            flex justify-center items-center"
             onClick={() => handleCategorySelect("code")}>
               Code
             </li>
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100"
+            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100
+            flex justify-center items-center"
             onClick={() => handleCategorySelect("devops")}>
               DevOps
             </li>
-            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100"
+            <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100
+            flex justify-center items-center"
             onClick={() => handleCategorySelect("docker")}>
               Docker
             </li>

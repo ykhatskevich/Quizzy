@@ -25,15 +25,18 @@ export default function SelectDifficulty () {
             className="flex flex-col gap-1 text-2xl text-teal-400"
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
-            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100 "
+            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100 
+            flex justify-center items-center"
             onClick={() => handleDifficultySelect('Easy')}>
               EASY
             </li>
-            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100"
+            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100
+            flex justify-center items-center"
             onClick={() => handleDifficultySelect('Medium')}>
               MEDIUM
             </li>
-            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100"
+            <li className="text-3xl p-3 cursor-pointer hover:text-teal-100 transition-colors border border-teal-300 rounded-lg hover:border-teal-100
+            flex justify-center items-center"
             onClick={() => handleDifficultySelect('Hard')}>
               HARD
             </li>
