@@ -35,6 +35,9 @@ export default function QuizPage() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const [totalQuestionsCount, setTotalQuestionsCount] = useState(0);
+
   const location = useLocation();
   const category = new URLSearchParams(location.search).get("category");
   const difficulty = new URLSearchParams(location.search).get("difficulty");
@@ -52,6 +55,10 @@ export default function QuizPage() {
           console.warn("API returned an empty array.");
         } else {
           setQuestions(data);
+
+          if (data.length > 0) {
+            setTotalQuestionsCount(data.length);
+          }
         }
       })
       .catch((error) => {
@@ -74,6 +81,10 @@ export default function QuizPage() {
       if (isCorrect !== undefined) {
         setIsAnswerCorrect(isCorrect);
         setIsAnswerSubmitted(true);
+
+        if (isCorrect) {
+          setCorrectAnswersCount(correctAnswersCount + 1);
+        }
       }
     }
   };
@@ -90,6 +101,10 @@ export default function QuizPage() {
 
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      if (currentQuestionIndex === questions.length - 1) {
+        setTotalQuestionsCount(totalQuestionsCount + questions.length);
+      }
     }
   };
 
@@ -132,8 +147,8 @@ export default function QuizPage() {
                 (isAnswerCorrect ? (
                   <p className="text-3xl text-green-200 font-semibold">Correct!</p>
                 ) : (
-                  <p className="text-2xl text-indigo-300 font-semibold">
-                    <span className="text-3xl text-red-200">Incorrect!</span> The correct answer is{" "}
+                  <p className="text-2xl text-indigo-300">
+                    <span className="text-3xl text-red-200 font-semibold">Incorrect!</span> The correct answer is{" "}
                     {Object.entries(currentQuestion.answers)
                       .filter(
                         ([key]) =>
@@ -147,7 +162,8 @@ export default function QuizPage() {
               {currentQuestionIndex < questions.length - 1 ? (
                 <button onClick={handleNextQuestion} className="text-3xl text-teal-400 mt-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">Next Question</button>
               ) : (
-                <p>Quiz Complete!</p>
+                <p className="text-2xl text-green-300">Quiz Complete! Correct answers:{correctAnswersCount}/
+                {totalQuestionsCount}</p>
               )}
             </div>
           )}
