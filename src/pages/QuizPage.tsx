@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import {Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 interface Question {
   id: number;
@@ -38,12 +38,15 @@ export default function QuizPage() {
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [totalQuestionsCount, setTotalQuestionsCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
   const category = new URLSearchParams(location.search).get("category");
   const difficulty = new URLSearchParams(location.search).get("difficulty");
 
   useEffect(() => {
+    setIsLoading(true);
+      
     fetch(
       `https://quizapi.io/api/v1/questions?apiKey=yCQVhQnw6eDgar42ge03acAhwuc12x0OIvcVCJJy&category=${category}&difficulty=${difficulty}&limit=20`
     )
@@ -51,6 +54,7 @@ export default function QuizPage() {
       .then((data) => {
         console.log("API Response:", data);
         setQuestions(data);
+        setIsLoading(false);
 
         if (Array.isArray(data) && data.length === 0) {
           console.warn("API returned an empty array.");
@@ -64,7 +68,9 @@ export default function QuizPage() {
       })
       .catch((error) => {
         console.error("Error fetching questions:", error);
+        setIsLoading(false);
       });
+ 
   }, [category, difficulty]);
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -117,14 +123,18 @@ export default function QuizPage() {
     setCorrectAnswersCount(0); // Reset the correct answers count.
   };
 
-
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      {currentQuestion && (
+      {isLoading ? (
+      <p className="text-xl text-teal-300" style={{fontFamily:"IBM PLEX MONO, monospace"}}>Loading...</p>
+    ) : (
+      currentQuestion && (
         <div className="text-center max-w-lg">
+          <Link to="/">
+          <button className="text-xl text-teal-300 cursor-pointer hover:text-teal-100 transition-colors mb-4 p-3 border border-teal-300 hover:border-teal-100 rounded-lg" style={{fontFamily:"IBM PLEX MONO, monospace"}}>Back to Home Page</button>
+          </Link>
           <h3
-            className="text-3xl text-indigo-300 mb-5 p-3 border border-indigo-200 rounded-lg"
+            className="text-3xl text-indigo-400 mb-5 p-3 border border-indigo-200 rounded-lg"
             style={{ fontFamily: "IBM PLEX MONO, monospace" }}
           >
             {currentQuestion.question}
@@ -139,9 +149,9 @@ export default function QuizPage() {
                     className={`${
                       isAnswerSubmitted && selectedAnswer === option
                         ? isAnswerCorrect
-                          ? "text-green-500 text-2xl" // Green text for correct answers
-                          : "text-red-500 text-2xl" // Red text for incorrect answers
-                        : "text-teal-400 text-2xl" // Default text color
+                          ? "text-green-500 text-2xl" 
+                          : "text-red-500 text-2xl" 
+                        : "text-slate-300 text-2xl" 
                     } cursor-pointer border-b mb-7 hover:text-teal-100`}
                   >
                     {text}
@@ -156,10 +166,15 @@ export default function QuizPage() {
             <div>
               {selectedAnswer &&
                 (isAnswerCorrect ? (
-                  <p className="text-3xl text-green-200 font-semibold">Correct!</p>
+                  <p className="text-3xl text-green-500 font-semibold">
+                    Correct!
+                  </p>
                 ) : (
-                  <p className="text-2xl text-indigo-300">
-                    <span className="text-3xl text-red-200 font-semibold">Incorrect!</span> The correct answer is{" "}
+                  <p className="text-xl text-indigo-200">
+                    <span className="text-3xl text-red-500 font-semibold">
+                      Incorrect!
+                    </span>{" "}
+                    The correct answer is{" "}
                     {Object.entries(currentQuestion.answers)
                       .filter(
                         ([key]) =>
@@ -171,23 +186,38 @@ export default function QuizPage() {
                   </p>
                 ))}
               {currentQuestionIndex < questions.length - 1 ? (
-                <button onClick={handleNextQuestion} className="text-3xl text-teal-400 mt-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">Next Question</button>
+                <button
+                  onClick={handleNextQuestion}
+                  className="text-3xl text-teal-400 mt-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors"
+                >
+                  Next Question
+                </button>
               ) : (
                 <div>
-                <p className="text-4xl text-green-300">Quiz Complete! Correct answers:{correctAnswersCount}/
-                {totalQuestionsCount}</p>
-                <button onClick={handleTryAgain} className="text-2xl text-teal-400 mt-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">Try again!</button>
-                <Link to="/">
-                <button className="text-2xl text-teal-400 mt-4 ml-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">Back to Home Page</button>
-                </Link>
-              </div>
+                  <p className="text-4xl text-green-300">
+                    Quiz Complete! Correct answers:{correctAnswersCount}/
+                    {totalQuestionsCount}
+                  </p>
+                  <button
+                    onClick={handleTryAgain}
+                    className="text-2xl text-teal-400 mt-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors"
+                  >
+                    Try again!
+                  </button>
+                  <Link to="/">
+                    <button className="text-2xl text-teal-400 mt-4 ml-4 p-3 border border-teal-300 rounded-lg hover:border-teal-100 hover:text-teal-100 transition-colors">
+                      Back to Home Page
+                    </button>
+                  </Link>
+                </div>
               )}
             </div>
           )}
           {!isAnswerSubmitted && selectedAnswer && (
-            <button onClick={handleSubmitAnswer} >Submit Answer</button>
+            <button onClick={handleSubmitAnswer}>Submit Answer</button>
           )}
         </div>
+    )
       )}
     </div>
   );

@@ -32,7 +32,6 @@ export default function Menu () {
                 <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors">
                 <Link to="/category">Start New Quiz</Link>
                 </li>
-                <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors">Browse Categories</li>
                 <li className="p-3 cursor-pointer hover:text-teal-100 transition-colors" onClick={openAboutModal}>About</li>
             </ul>
         </div>
