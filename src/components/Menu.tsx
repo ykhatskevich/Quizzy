@@ -16,15 +16,13 @@ export default function Menu () {
 
     const aboutContent = `
 
-    Quizzy is an engaging and interactive quiz application designed to test your knowledge in various domains. Quizzy has a wide range of quiz categories to choose from.
+    Quizzy is an engaging and interactive quiz application designed to test your knowledge in various topics. Quizzy has a wide range of quiz categories to choose from.
     
-    Key Features:
+    Explore a variety of quiz topics, including Linux, Dev Ops, Programming, and more.
     
-    Diverse Categories: Explore a variety of quiz categories, including Technology, History, Science, and more. There's something for everyone.
+   Challenge yourself with quizzes ranging from easy to hard levels. Test your knowledge at your own pace.
     
-    Multiple Difficulty Levels: Challenge yourself with quizzes ranging from easy to expert levels. Test your knowledge at your own pace.
-    
-    Immediate Feedback: Receive instant feedback on your answers. Know whether you got it right or need to brush up on your facts.`
+    Receive instant feedback on your answers. Know whether you got it right or need to brush up on your facts.`
     
     return (
         <>
